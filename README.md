@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Sarah Papierz: movie-challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The goal of this exercise is to implement a simple movie library application using the latest version of React and associated modern tools and libraries.
 
 ## Available Scripts
 
