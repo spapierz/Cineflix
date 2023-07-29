@@ -1,11 +1,11 @@
 import React from 'react';
 
-const SearchBar = () => {
+const MovieItem = () => {
     return (
         <div>
-            search bar
+            test
         </div>
     )
 };
 
-export default SearchBar;
+export default MovieItem;

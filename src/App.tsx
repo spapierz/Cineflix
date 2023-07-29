@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { Container, Typography } from '@mui/material';
-import './app.scss';
+//import './app.scss';
 
 const LazyMovieList = lazy(() => import('./components/MovieList'));
 const LazySearchBar = lazy(() => import('./components/SearchBar'));
