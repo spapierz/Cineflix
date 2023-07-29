@@ -1,25 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Movie } from '../interfaces/Movies';
-import { Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
+import { Grid } from '@mui/material';
+import MovieItem from './MovieItem';
 
 interface MovieListProps {
-    movies: Movie[];
+  movies: Movie[];
 }
 
 const MovieList: React.FC<MovieListProps> = ({ movies }) => {
-    return (
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-            {movies.map((movie) => (
-                <Card key={movie.imdbID} style={{ margin: '10px', minWidth: '300px' }}>
-                    <Typography variant="h5">{movie.title}</Typography>
-                    <CardMedia image={movie.poster} title={movie.title} />
-                    <CardContent>
-                        <Typography variant="body2">{movie.description}</Typography>
-                    </CardContent>
-                </Card>
-            ))}
-        </div>
-    );
+  return (
+    <Grid container spacing={2}>
+      {movies.map((movie) => (
+        <Grid item sm={6} md={4} key={movie.id}>
+          <MovieItem movie={movie} />
+        </Grid>
+      ))}
+    </Grid>
+  );
 };
 
 export default MovieList;

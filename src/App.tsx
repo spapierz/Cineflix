@@ -1,12 +1,12 @@
 import React, { Suspense, lazy } from 'react';
 import { Container, Typography } from '@mui/material';
+import MovieList from './components/MovieList';
 //import './app.scss';
 
-const LazyMovieList = lazy(() => import('./components/MovieList'));
+//const LazyMovieList = lazy(() => import('./components/MovieList'));
 const LazySearchBar = lazy(() => import('./components/SearchBar'));
 
 const App: React.FC = () => {
-  // Sample movie data as an array of Movie objects
   const movies = [
     {
       title: 'Barbie',
@@ -14,7 +14,7 @@ const App: React.FC = () => {
       description: 'barbie and ken lands',
       releaseDate: 'July',
       rating: '5*',
-      imdbID: 'barbie',
+      id: 'barbie',
     },
     {
       title: 'Indiana Jones',
@@ -22,7 +22,7 @@ const App: React.FC = () => {
       description: 'dial of doom',
       releaseDate: 'june',
       rating: '5*',
-      imdbID: 'indiana',
+      id: 'indiana',
     },
   ];
 
@@ -34,8 +34,7 @@ const App: React.FC = () => {
         </Typography>
         <Suspense fallback={<div>Loading...</div>}>
           <LazySearchBar />
-          {/* Pass the movies prop */}
-          <LazyMovieList movies={movies} />
+          <MovieList movies={movies} />
         </Suspense>
       </Container>
     </div>

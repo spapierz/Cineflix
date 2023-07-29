@@ -4,7 +4,7 @@ export interface Movie {
     description: string;
     releaseDate: string;
     rating: string;
-    imdbID: string;
+    id: string;
 }
 
 export interface MovieContextData {
@@ -12,5 +12,5 @@ export interface MovieContextData {
     favorites: Movie[];
     searchMovies: (query: string) => Promise<void>;
     addToFavorites: (movie: Movie) => void;
-    removeFromFavorites: (imdbID: string) => void;
+    removeFromFavorites: (id: string) => void;
 }
