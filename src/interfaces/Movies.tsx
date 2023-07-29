@@ -9,8 +9,8 @@ export interface Movie {
 
 export interface MovieContextData {
     movies: Movie[];
-    favorites: Movie[];
-    searchMovies: (query: string) => Promise<void>;
-    addToFavorites: (movie: Movie) => void;
-    removeFromFavorites: (id: string) => void;
+    //favorites: Movie[];
+    //searchMovies: (query: string) => Promise<void>;
+    //addToFavorites: (movie: Movie) => void;
+    //removeFromFavorites: (id: string) => void;
 }

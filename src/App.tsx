@@ -1,12 +1,11 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useContext } from 'react';
 import { Container, Typography } from '@mui/material';
-import MovieList from './components/MovieList';
-//import './app.scss';
 
-//const LazyMovieList = lazy(() => import('./components/MovieList'));
+
+const LazyMovieList = lazy(() => import('./components/MovieList'));
 const LazySearchBar = lazy(() => import('./components/SearchBar'));
 
-const App: React.FC = () => {
+/*
   const movies = [
     {
       title: 'Barbie',
@@ -25,7 +24,8 @@ const App: React.FC = () => {
       id: 'indiana',
     },
   ];
-
+*/
+const App: React.FC = () => {
   return (
     <div className="App">
       <Container>
@@ -34,7 +34,7 @@ const App: React.FC = () => {
         </Typography>
         <Suspense fallback={<div>Loading...</div>}>
           <LazySearchBar />
-          <MovieList movies={movies} />
+          <LazyMovieList />
         </Suspense>
       </Container>
     </div>
