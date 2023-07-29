@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Movie } from '../interfaces/Movies';
 import { Typography, IconButton, Dialog, DialogTitle, DialogContent } from '@mui/material';
-import { StarBorder } from '@mui/icons-material';
+import { Star, StarBorder } from '@mui/icons-material';
+import { MovieContext } from '../context/MovieContext';
 
 interface MovieItemProps {
     movie: Movie;
@@ -11,7 +12,10 @@ const imageBaseUrl = 'https://image.tmdb.org/t/p/w220_and_h330_face/';
 
 const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
     const [open, setOpen] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
 
+    const { addToFavorites, removeFromFavorites, favorites } = useContext(MovieContext);
+    console.log(favorites)
     const handleOpenDialog = () => {
         setOpen(true);
     };
@@ -19,7 +23,30 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
     const handleCloseDialog = () => {
         setOpen(false);
     };
-    console.log(movie)
+
+    // Check if the movie is in the favorites array
+    const isMovieInFavorites = favorites.some((favMovie) => favMovie.id === movie.id);
+
+    useEffect(() => {
+        setIsFavorite(isMovieInFavorites);
+    }, [isMovieInFavorites]);
+
+    const handleToggleFavorite = () => {
+        if (isFavorite) {
+            removeFromFavorites(movie.id);
+        } else {
+            addToFavorites(movie);
+        }
+        setIsFavorite(!isFavorite);
+    };
+
+    // Format the release date in "Month Day, Year" format
+    const formattedReleaseDate = new Date(movie.release_date).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+    });
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}>
             <img
@@ -30,7 +57,7 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
                     width: '100%',
                     objectFit: 'cover',
                     borderRadius: '10px',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
                 }}
                 onClick={handleOpenDialog}
             />
@@ -39,16 +66,21 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
                     <strong>{movie.title}</strong>
                 </Typography>
                 <div style={{ position: 'absolute', bottom: 70, right: 10 }}>
-                    <IconButton>
-                        <StarBorder style={{ color: 'white', fontSize: '24px', border: '2px solid white', borderRadius: '50%', padding: '5px', opacity: 0.8 }} />
+                    <IconButton onClick={handleToggleFavorite} aria-label={isFavorite ? 'favorited star icon' : 'not yet favorited star icon'}>
+                        {isFavorite ? <Star style={{ color: 'white', fontSize: '24px', border: '2px solid white', borderRadius: '50%', padding: '5px', opacity: 1 }} /> : <StarBorder style={{ color: 'white', fontSize: '24px', border: '2px solid white', borderRadius: '50%', padding: '5px', opacity: 0.8 }} />}
                     </IconButton>
                 </div>
             </div>
             <Dialog open={open} onClose={handleCloseDialog}>
-                <DialogTitle>{movie.title}</DialogTitle>
+                <DialogTitle>
+                    <Typography variant="h6" component="span" sx={{ fontWeight: 'bold' }}>
+                        {movie.title}
+                    </Typography>
+                </DialogTitle>
                 <DialogContent>
-                    <Typography variant="body1">
-                        {movie.overview}
+                    <Typography variant="body1">{movie.overview}</Typography>
+                    <Typography variant="subtitle1" sx={{ mt: 3, fontSize: 14, textAlign: 'right' }}>
+                        <strong>Released:</strong> {formattedReleaseDate}
                     </Typography>
                 </DialogContent>
             </Dialog>

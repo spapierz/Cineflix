@@ -5,7 +5,7 @@ import MovieContextProvider from './context/MovieContext';
 const LazyMovieList = lazy(() => import('./components/MovieList'));
 const LazySearchBar = lazy(() => import('./components/SearchBar'));
 
-const title = 'Movie Library';
+const title = 'Popular Movies';
 
 const App: React.FC = () => {
   return (

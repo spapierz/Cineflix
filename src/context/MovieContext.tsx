@@ -30,13 +30,21 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({ children })
         }
     };
 
+    const addToFavorites = (movie: Movie) => {
+        setFavorites(prevFavorites => [...prevFavorites, movie]);
+    };
+
+    const removeFromFavorites = (id: string) => {
+        setFavorites(prevFavorites => prevFavorites.filter(movie => movie.id !== id))
+    };
+
     useEffect(() => {
         console.log('test movies')
         fetchPopularMovies();
     }, []);
 
     return (
-        <MovieContext.Provider value={{ movies }}>
+        <MovieContext.Provider value={{ movies, favorites, addToFavorites, removeFromFavorites }}>
             {children}
         </MovieContext.Provider>
     );
