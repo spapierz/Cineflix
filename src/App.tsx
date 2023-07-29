@@ -1,6 +1,6 @@
-import React, { Suspense, lazy, useContext } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Container, Typography } from '@mui/material';
-
+import MovieContextProvider from './context/MovieContext';
 
 const LazyMovieList = lazy(() => import('./components/MovieList'));
 const LazySearchBar = lazy(() => import('./components/SearchBar'));
@@ -27,17 +27,19 @@ const LazySearchBar = lazy(() => import('./components/SearchBar'));
 */
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Container>
-        <Typography variant="h2" gutterBottom>
-          Movie App
-        </Typography>
-        <Suspense fallback={<div>Loading...</div>}>
-          <LazySearchBar />
-          <LazyMovieList />
-        </Suspense>
-      </Container>
-    </div>
+    <MovieContextProvider>
+      <div className="App">
+        <Container>
+          <Typography variant="h2" gutterBottom>
+            Movie App
+          </Typography>
+          <Suspense fallback={<div>Loading...</div>}>
+            <LazySearchBar />
+            <LazyMovieList />
+          </Suspense>
+        </Container>
+      </div>
+    </MovieContextProvider>
   );
 };
 
