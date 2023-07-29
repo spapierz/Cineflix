@@ -5,15 +5,14 @@ import MovieItem from './MovieItem';
 
 const MovieList: React.FC = () => {
     const { movies } = useContext(MovieContext);
-    
-    console.log('hi', movies)
+
     return (
-        <Grid container spacing={2}>
-            {/*movies?.map((movie) => (
-                <Grid item sm={6} md={4} key={movie.id}>
+        <Grid container spacing={3}>
+            {movies?.map((movie) => (
+                <Grid item xs={5} sm={3} md={2} key={movie.id}>
                     <MovieItem movie={movie} />
                 </Grid>
-            ))*/}
+            ))}
         </Grid>
     );
 };
