@@ -67,6 +67,8 @@ Given more time, I would decouple the `MovieList` component so that the favorite
 
 While exploring The Movie DB API, I noticed that it provides valuable information such as movie popularity and votes. However, I did not come across any data related to movie ratings. As a result, the app currently does not include movie ratings in its displayed content.
 
+The API key should live in AWS secrets or a relating secure storage for keys, but lives in the code as a small project playground to be shared and tested.
+
 ## Installation
 
 To install the app and its dependencies, run the following command in your project directory:
