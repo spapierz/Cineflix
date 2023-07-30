@@ -65,6 +65,8 @@ The app is developed with users in mind, aiming to provide an intuitive and enga
 
 Given more time, I would decouple the `MovieList` component so that the favorites button lived in its own component along with the popular movies title. Additionally, the movies title would change dynamically based on whether a user was searching for a movie or the `filteredMovies` state was empty. This would further improve the code organization and reusability, enhancing the maintainability of the app in the long run.
 
+While exploring The Movie DB API, I noticed that it provides valuable information such as movie popularity and votes. However, I did not come across any data related to movie ratings. As a result, the app currently does not include movie ratings in its displayed content.
+
 ## Installation
 
 To install the app and its dependencies, run the following command in your project directory:
