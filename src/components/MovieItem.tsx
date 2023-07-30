@@ -40,7 +40,7 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
         setIsFavorite(!isFavorite);
     };
 
-    // Format the release date in "Month Day, Year" format
+    // Format the release date in "Month Day, Year" format... use moment.js as app grows
     const formattedReleaseDate = new Date(movie.release_date).toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
@@ -48,7 +48,12 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
     });
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}>
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            position: 'relative'
+        }}>
             <img
                 src={`${imageBaseUrl}${movie.backdrop_path}`}
                 alt={movie.title}
@@ -61,9 +66,18 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
                 }}
                 onClick={handleOpenDialog}
             />
-            <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-between', backgroundColor: 'white', padding: '8px 8px 8px 0', borderRadius: '0 0 10px 10px' }}>
-                <Typography variant="subtitle2" gutterBottom>
-                    <strong>{movie.title}</strong>
+            <div style={{
+                flexGrow: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
+                padding: '8px 8px 8px 0',
+                borderRadius: '0 0 10px 10px',
+                color: '#333'
+            }}>
+                <Typography variant="subtitle2">
+                    {movie.title}
                 </Typography>
                 <div style={{ position: 'absolute', bottom: 70, right: 10 }}>
                     <IconButton onClick={handleToggleFavorite} aria-label={isFavorite ? 'favorited star icon' : 'not yet favorited star icon'}>
