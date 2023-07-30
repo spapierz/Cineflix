@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# CineFlix Movie App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+- [Introduction](#introduction)
+- [Technologies Used](#technologies-used)
+- [Folder Structure](#folder-structure)
+- [State Management with useContext](#state-management-with-usecontext)
+- [Testing with React Testing Library](#testing-with-react-testing-library)
+- [Accessibility Considerations](#accessibility-considerations)
+- [Material-UI (MUI) Library](#material-ui-mui-library)
+- [User-Centric Approach](#user-centric-approach)
+- [Installation](#installation)
+- [How to Run](#how-to-run)
+- [Running Tests](#running-tests)
 
-In the project directory, you can run:
+## Introduction
 
-### `npm start`
+The CineFlix Movie App is a web application designed to provide users with a convenient way to discover and explore movies. Users can view a collection of movies, access movie details, add favorites, and read movie descriptions. The app aims to deliver an enjoyable movie browsing experience, focusing on user-centric design and accessibility.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React**: The app is built using the React framework, providing a fast and interactive user interface.
+- **React Context API**: The app employs the Context API for state management, enabling global state sharing without prop drilling.
+- **React Testing Library**: This testing library is used for unit testing React components, ensuring the app functions as expected.
+- **Material-UI (MUI)**: The app utilizes the Material-UI library for its sleek and responsive UI components, enhancing the overall user experience.
+- **TypeScript**: TypeScript is used for type checking, improving code reliability and developer productivity.
+- **Jest**: Jest is the testing framework used in conjunction with React Testing Library for running test cases.
+- **Axios**: Axios is used for making HTTP requests to external APIs for movie data.
 
-### `npm test`
+## Folder Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The folder structure is organized to promote maintainability and scalability. Below is an overview of the primary folders and their purposes:
 
-### `npm run build`
+- `src/`
+  - `components/`: Contains reusable React components used throughout the app.
+  - `context/`: Holds the MovieContext and related context providers for global state management.
+  - `interfaces/`: Defines TypeScript interfaces for movie-related data structures.
+  - `services/`: Includes utility functions for API interactions, data processing, etc.
+  - `styles/`: Contains global styles and theme configurations.
+  - `views/`: Each view corresponds to a specific page in the app, containing its components and logic.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## State Management with useContext
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The app utilizes the `useContext` hook, which is part of the React Context API, for state management. The MovieContext is defined in the `context/MovieContext.tsx` file, enabling global state sharing across components. This approach eliminates the need for prop drilling and provides a more concise and scalable solution for managing application state.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Testing with React Testing Library
 
-### `npm run eject`
+To ensure the app's stability and functionality, unit tests are written using the React Testing Library and Jest. Tests cover components, context providers, and utility functions, guaranteeing that the app performs as expected and remains robust during development and future updates.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Accessibility Considerations
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Accessibility is a top priority in the CineFlix Movie App. All components are designed with accessible markup, proper ARIA attributes, and keyboard navigation support. Focus management, color contrast, and semantic HTML elements are carefully implemented to improve accessibility for users with disabilities.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Material-UI (MUI) Library
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Material-UI (MUI) is chosen as the primary UI library due to its wide range of beautifully designed components, responsive layouts, and theming capabilities. MUI components are used throughout the app to ensure a consistent and modern look, saving development time and enhancing the user experience.
 
-## Learn More
+## User-Centric Approach
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The app is developed with users in mind, aiming to provide an intuitive and engaging experience. User feedback and needs are taken into account during the design process. The app's user interface is clean, simple, and easy to navigate, ensuring users can focus on exploring their favorite movies without distractions.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Installation
 
-### Code Splitting
+To install the app and its dependencies, run the following command in your project directory:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`npm install --legacy-peer-deps`
 
-### Analyzing the Bundle Size
+## How to Run
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+To start the app, use the following command:
 
-### Making a Progressive Web App
+`npm start`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The app will be available at `http://localhost:3000`.
 
-### Advanced Configuration
+## Running Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+To run the tests for the app, use the following command:
 
-### Deployment
+`npm test`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Jest will execute the test cases, and you'll see the results in the console.

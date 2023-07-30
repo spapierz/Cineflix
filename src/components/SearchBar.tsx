@@ -23,7 +23,7 @@ const SearchInput = styled(InputBase)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-const SearchBar = () => {
+export const SearchBar = () => {
   const { searchMovies } = useContext(MovieContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +37,7 @@ const SearchBar = () => {
             <Search />
         </SearchIcon>
         <SearchInput
-            placeholder="Search movies..."
+            placeholder="Search all movies..."
             onChange={handleChange}
         />
     </SearchBarContainer>

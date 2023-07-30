@@ -1,10 +1,8 @@
 export interface Movie {
     title: string;
-    backdrop_path: string;
     poster_path: string;
     overview: string;
     release_date: string;
-    rating: string;
     id: string;
 }
 
