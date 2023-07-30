@@ -10,6 +10,7 @@
 - [Accessibility Considerations](#accessibility-considerations)
 - [Material-UI (MUI) Library](#material-ui-mui-library)
 - [User-Centric Approach](#user-centric-approach)
+- [Note](#note)
 - [Installation](#installation)
 - [How to Run](#how-to-run)
 - [Running Tests](#running-tests)
@@ -59,6 +60,10 @@ Material-UI (MUI) is chosen as the primary UI library due to its wide range of b
 ## User-Centric Approach
 
 The app is developed with users in mind, aiming to provide an intuitive and engaging experience. User feedback and needs are taken into account during the design process. The app's user interface is clean, simple, and easy to navigate, ensuring users can focus on exploring their favorite movies without distractions.
+
+## Note
+
+Given more time, I would decouple the `MovieList` component so that the favorites button lived in its own component along with the popular movies title. Additionally, the movies title would change dynamically based on whether a user was searching for a movie or the `filteredMovies` state was empty. This would further improve the code organization and reusability, enhancing the maintainability of the app in the long run.
 
 ## Installation
 
