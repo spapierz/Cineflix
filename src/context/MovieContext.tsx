@@ -12,11 +12,13 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({ children })
     const [movies, setMovies] = useState<Movie[]>([]);
     const [favorites, setFavorites] = useState<Movie[]>([]);
 
+    const API_KEY = '1fdec8cee31b5e9665542556f7f271d1';
+    
     const fetchPopularMovies = async () => {
         try {
             const response = await axios.get<{ results: Movie[]}>('https://api.themoviedb.org/3/movie/popular', {
                 params: {
-                    api_key: '1fdec8cee31b5e9665542556f7f271d1',
+                    api_key: API_KEY,
                 },
             });
             
@@ -30,6 +32,30 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({ children })
         }
     };
 
+    const searchMovies = async (query: string) => {
+        try {
+            const response = await axios.get<{ results: Movie[] }>(
+                `https://api.themoviedb.org/3/search/movie?query=${query}`, {
+                    params: {
+                        api_key: API_KEY,
+                    },
+                });
+
+                const filteredMovies = response.data.results.filter((movie) =>
+                movie.title.toLowerCase().includes(query.toLowerCase())
+            );
+
+            if (!response.data || !response.data.results) {
+                throw new Error('Error connecting to the API');
+            }
+
+            // user searches and gets results, but if user deletes, it grabs popular movies again
+            response.data.results.length ? setMovies(filteredMovies) : fetchPopularMovies();
+        } catch (error) {
+            console.error('Error searching movie data');
+        }
+    };
+
     const addToFavorites = (movie: Movie) => {
         setFavorites(prevFavorites => [...prevFavorites, movie]);
     };
@@ -39,12 +65,11 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({ children })
     };
 
     useEffect(() => {
-        console.log('test movies')
         fetchPopularMovies();
     }, []);
 
     return (
-        <MovieContext.Provider value={{ movies, favorites, addToFavorites, removeFromFavorites }}>
+        <MovieContext.Provider value={{ movies, favorites, searchMovies, addToFavorites, removeFromFavorites }}>
             {children}
         </MovieContext.Provider>
     );

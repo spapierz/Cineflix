@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { InputBase, IconButton, Paper } from '@mui/material';
 import { Search } from '@mui/icons-material';
+import { MovieContext } from '../context/MovieContext';
 
 const SearchBarContainer = styled(Paper)(({ theme }) => ({
   display: 'flex',
@@ -23,12 +24,22 @@ const SearchInput = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchBar = () => {
+  const { searchMovies } = useContext(MovieContext);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    searchMovies(value);
+  };
+
   return (
     <SearchBarContainer>
-      <SearchIcon>
-        <Search />
-      </SearchIcon>
-      <SearchInput placeholder="Search movies..." />
+        <SearchIcon>
+            <Search />
+        </SearchIcon>
+        <SearchInput
+            placeholder="Search movies..."
+            onChange={handleChange}
+        />
     </SearchBarContainer>
   );
 };
