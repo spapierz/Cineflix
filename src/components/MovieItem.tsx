@@ -45,12 +45,7 @@ export const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
   });
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      position: 'relative'
-    }}>
+    <div style={{ position: 'relative' }}>
       <img
         src={movie.poster_path ? `${imageBaseUrl}${movie.poster_path}` : logo}
         alt={movie.title}
@@ -64,23 +59,42 @@ export const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
         onClick={handleOpenDialog}
       />
       <div style={{
-        flexGrow: 1,
+        position: 'absolute',
+        top: 168,
+        right: 10,
+        zIndex: 1,
+      }}>
+        <IconButton onClick={handleToggleFavorite} aria-label={isFavorite ? 'favorited star icon' : 'not yet favorited star icon'}>
+          {isFavorite ? 
+            <Star style={{
+                color: 'white',
+                fontSize: '24px',
+                border: '2px solid white',
+                borderRadius: '50%',
+                padding: '5px'
+              }}
+            /> :
+            <StarBorder style={{
+                color: 'white',
+                fontSize: '24px',
+                border: '2px solid white',
+                borderRadius: '50%',
+                padding: '5px'
+              }} />}
+        </IconButton>
+      </div>
+      <div style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
         backgroundColor: 'white',
         padding: '8px 8px 8px 0',
-        borderRadius: '0 0 10px 10px'
+        borderRadius: '0 0 10px 10px',
       }}>
         <Typography variant="subtitle2" gutterBottom>
           {movie.title}
         </Typography>
-        <div style={{ position: 'absolute', bottom: 70, right: 10 }}>
-          <IconButton onClick={handleToggleFavorite} aria-label={isFavorite ? 'favorited star icon' : 'not yet favorited star icon'}>
-            {isFavorite ? <Star style={{ color: 'white', fontSize: '24px', border: '2px solid white', borderRadius: '50%', padding: '5px' }} /> : <StarBorder style={{ color: 'white', fontSize: '24px', border: '2px solid white', borderRadius: '50%', padding: '5px' }} />}
-          </IconButton>
-        </div>
       </div>
       <Dialog open={open} onClose={handleCloseDialog}>
         <DialogTitle>

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import axios from 'axios';
 import { Movie, MovieContextData } from '../interfaces/Movies';
 
@@ -11,6 +11,7 @@ export const MovieContext = createContext<MovieContextData>({} as MovieContextDa
 const MovieContextProvider: React.FC<MovieContextProviderProps> = ({ children }) => {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [favorites, setFavorites] = useState<Movie[]>([]);
+    const [favoritesLoaded, setFavoritesLoaded] = useState(false);
 
     const API_KEY = '1fdec8cee31b5e9665542556f7f271d1';
     
@@ -26,7 +27,7 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({ children })
                 throw new Error('Error connecting to the API');
             }
 
-            setMovies(response.data.results)
+            setMovies(response.data.results);
         } catch (error) {
             console.error('Error fetching popular movie data');
         }
@@ -41,7 +42,7 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({ children })
                     },
                 });
 
-                const filteredMovies = response.data.results.filter((movie) =>
+            const filteredMovies = response.data.results.filter((movie) =>
                 movie.title.toLowerCase().includes(query.toLowerCase())
             );
 
@@ -61,12 +62,27 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({ children })
     };
 
     const removeFromFavorites = (id: string) => {
-        setFavorites(prevFavorites => prevFavorites.filter(movie => movie.id !== id))
+        setFavorites(prevFavorites => prevFavorites.filter(movie => movie.id !== id));
     };
 
     useEffect(() => {
+        const savedFavorites = localStorage.getItem('favorites');
+        if (savedFavorites) {
+            const parsedFavorites: Movie[] = JSON.parse(savedFavorites);
+            setFavorites(parsedFavorites);
+        }
+        setFavoritesLoaded(true);
+        setMovies([]);
         fetchPopularMovies();
     }, []);
+
+    // Save favorites to localStorage whenever 'favorites' state changes
+    useEffect(() => {
+        if (favoritesLoaded) {
+            const favoritesToSave = JSON.stringify(favorites);
+            localStorage.setItem('favorites', favoritesToSave);
+        }
+    }, [favorites, favoritesLoaded]);
 
     return (
         <MovieContext.Provider value={{ movies, favorites, searchMovies, addToFavorites, removeFromFavorites }}>
