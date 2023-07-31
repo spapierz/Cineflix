@@ -1,46 +1,46 @@
-import React, { useContext, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import { InputBase, IconButton, Paper } from '@mui/material';
+import React, { useContext, useCallback } from 'react';
+import { Paper, IconButton, InputBase } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { MovieContext } from '../context/MovieContext';
 
-const SearchBarContainer = styled(Paper)(({ theme }) => ({
-  display: 'flex',
+const searchContainerStyle = {
   alignItems: 'center',
   padding: '2px 4px',
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: '4px',
   boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.2)',
-}));
+};
 
-const SearchIcon = styled(IconButton)(({ theme }) => ({
-  padding: 8,
+const searchIconStyle = {
+  padding: 1,
   color: 'lightgrey',
-}));
+};
 
-const SearchInput = styled(InputBase)(({ theme }) => ({
-  flex: 1,
-  marginLeft: theme.spacing(1),
-  color: theme.palette.text.primary,
-}));
+const searchInputStyle = {
+  marginLeft: '8px',
+  color: 'rgba(0, 0, 0, 0.87)',
+};
 
 export const SearchBar = () => {
-  const { searchMovies } = useContext(MovieContext);
+  const { searchMovies, searchQuery, isFavoritesPage } = useContext(MovieContext);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     searchMovies(value);
-  };
+  }, [searchMovies]);
 
   return (
-    <SearchBarContainer>
-        <SearchIcon>
-            <Search />
-        </SearchIcon>
-        <SearchInput
-            placeholder="Search all movies..."
-            onChange={handleChange}
-        />
-    </SearchBarContainer>
+    <Paper sx={searchContainerStyle} role="search">
+      <IconButton sx={searchIconStyle}>
+        <Search />
+      </IconButton>
+      <InputBase
+        sx={searchInputStyle}
+        id="search-input"
+        placeholder="Search all movies..."
+        onChange={handleChange}
+        aria-label="Search all movies"
+      />
+    </Paper>
   );
 };
 

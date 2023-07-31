@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { Container, Typography, CircularProgress } from '@mui/material';
 import MovieContextProvider from './context/MovieContext';
+import FavoriteButton from './components/FavoritesButton';
+import MovieGalleryTitle from './components/MovieGalleryTitle';
 
 const LazyMovieList = lazy(() => import('./components/MovieList'));
 const LazySearchBar = lazy(() => import('./components/SearchBar'));
@@ -18,15 +20,17 @@ const spinnerStyles: React.CSSProperties = {
 const App: React.FC = () => {
   return (
     <MovieContextProvider>
-        <Container sx={{ pt: 8 }}>
-          <Typography variant="h2" gutterBottom>
-            {title} <img alt="Fictional Cineflix logo" width="70px" height="auto" src={logo} />
-          </Typography>
-          <Suspense fallback={<div style={spinnerStyles}><CircularProgress /></div>}>
-            <LazySearchBar />
-            <LazyMovieList />
-          </Suspense>
-        </Container>
+      <Container sx={{ pt: 8 }}>
+        <Typography variant="h2" gutterBottom>
+          {title} <img alt="Fictional Cineflix logo" width="70px" height="auto" src={logo} />
+        </Typography>
+        <Suspense fallback={<div style={spinnerStyles}><CircularProgress /></div>}>
+          <LazySearchBar />
+          <FavoriteButton />
+          <MovieGalleryTitle />
+          <LazyMovieList />
+        </Suspense>
+      </Container>
     </MovieContextProvider>
   );
 };

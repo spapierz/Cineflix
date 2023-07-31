@@ -5,29 +5,34 @@ import MovieItem from '../MovieItem';
 import { Movie } from '../../interfaces/Movies';
 import { MovieContext } from '../../context/MovieContext';
 
-interface MovieContextData {
-  movies: Movie[];
-  favorites: Movie[];
-  addToFavorites: (movie: Movie) => void;
-  removeFromFavorites: (id: string) => void;
-  searchMovies: (movie: Movie) => void;
-}
-
-const movieContextDataMock = {
-    movies: [
-      {
-        id: '1',
-        poster_path: '/test',
-        title: 'The Godfather',
-        release_date: '2003-12-23',
-        overview: 'desciption'
-      },
-    ],
-    favorites: [],
-    addToFavorites: jest.fn(),
-    removeFromFavorites: jest.fn((id: string) => {}), 
-    searchMovies: jest.fn(),
-  };
+const mockContextValue = {
+  movies: [
+    {
+      id: '1',
+      poster_path: '/test',
+      title: 'The Godfather',
+      release_date: '2003-12-23',
+      overview: 'desciption'
+    },
+  ],
+  favorites: [
+    {
+      id: '1',
+      poster_path: '/test',
+      title: 'The Godfather',
+      release_date: '2003-12-23',
+      overview: 'desciption'
+    },
+  ],
+  addToFavorites: jest.fn(),
+  removeFromFavorites: jest.fn((id: string) => {}), 
+  searchMovies: jest.fn(),
+  isFavoritesPage: false,
+  movieGalleryTitle: '',
+  searchQuery: '',
+  isSearching: false,
+  toggleFavorites: jest.fn(),
+};
 
 const testMovie: Movie = {
   id: '1',
@@ -40,7 +45,7 @@ const testMovie: Movie = {
 describe('MovieItem Component', () => {
     it('should toggle favorite movie on click', () => {
         render(
-        <MovieContext.Provider value={{ ...movieContextDataMock, favorites: [testMovie] }}>
+        <MovieContext.Provider value={{ ...mockContextValue, favorites: [testMovie] }}>
             <MovieItem movie={testMovie} />
         </MovieContext.Provider>
         );
@@ -49,15 +54,15 @@ describe('MovieItem Component', () => {
         expect(starButton).toBeInTheDocument();
 
         userEvent.click(starButton);
-        expect(movieContextDataMock.removeFromFavorites).toHaveBeenCalledWith(testMovie.id);
+        expect(mockContextValue.removeFromFavorites).toHaveBeenCalledWith(testMovie.id);
 
         userEvent.click(starButton);
-        expect(movieContextDataMock.addToFavorites).toHaveBeenCalledWith(testMovie);
+        expect(mockContextValue.addToFavorites).toHaveBeenCalledWith(testMovie);
     });
 
     it('should open and close the dialog', () => {
         render(
-            <MovieContext.Provider value={{ ...movieContextDataMock, favorites: [testMovie] }}>
+            <MovieContext.Provider value={{ ...mockContextValue, favorites: [testMovie] }}>
                 <MovieItem movie={testMovie} />
             </MovieContext.Provider>
         );
