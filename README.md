@@ -38,7 +38,6 @@ The folder structure is organized to promote maintainability and scalability. Be
   - `context/`: Holds the MovieContext and related context providers for global state management.
   - `interfaces/`: Defines TypeScript interfaces for movie-related data structures.
   - `services/`: Includes utility functions for API interactions, data processing, etc.
-  - `styles/`: Contains global styles and theme configurations.
   - `views/`: Each view corresponds to a specific page in the app, containing its components and logic.
 
 ## State Management with useContext
@@ -63,7 +62,7 @@ The app is developed with users in mind, aiming to provide an intuitive and enga
 
 ## Note
 
-Given more time, I would decouple the `MovieList` component so that the favorites button lived in its own component along with the popular movies title. This would further improve the code organization and reusability, enhancing the maintainability of the app in the long run. Additionally, the movies title would change dynamically based on whether a user was searching for a movie or the `filteredMovies` state was empty. To enhance user experience, I would also change if a user is viewing their favorites, and they type in the search bar, it would show their search results instead of the favorites. I consider this a developer UX bug. 
+To enhance user experience, I would also change if a user is viewing their favorites, and they type in the search bar, it would show their search results instead of the favorites, then update moviegallerytitle as needed.
 
 While exploring The Movie DB API, I noticed that it provides valuable information such as movie popularity and votes. However, I did not come across any data related to movie ratings. As a result, the app currently does not include movie ratings in its displayed content.
 
