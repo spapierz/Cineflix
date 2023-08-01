@@ -39,7 +39,7 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({ children })
     }, [setMovies]);
 
     // Function to search movies
-    const searchMovies = useCallback(async (query: string) => {
+    const searchMovies = async (query: string) => {
         try {
             const response = await axios.get<{ results: Movie[] }>(
                 `https://api.themoviedb.org/3/search/movie?query=${query}`, {
@@ -68,7 +68,7 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({ children })
         } catch (error) {
             console.error('Error searching movie data');
         }
-    }, [setIsSearching, setSearchQuery, fetchPopularMovies]);
+    };
 
     // Function to add movie to favorites
     const addToFavorites = useCallback((movie: Movie) => {
